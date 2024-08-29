@@ -1,0 +1,129 @@
+
+In the fast-paced environment of GOAIR, a prominent Indian airline, maintaining security and efficiency at the airport is paramount. The challenge is to ensure that only authorized employees can access restricted areas. To achieve this, GOAIR has turned to you, a skilled software consultant, to automate the process of validating employee entries. 
+
+Consider the following scenario: 
+
+You receive input that includes the employee's id, entry type, duration in the format of a string in the UserInterface class. 
+
+Component Specification: EntryUtility 
+
+Type (Class) 
+
+Method 
+
+Parameters 
+
+Responsibilities 
+
+EntryUtility 
+
+validateEmployeeId 
+
+String employeeId 
+
+This method validates the employee id according to the condition . If employee id is valid, it returns the true. If employee id is not valid, throw an InvalidEntryException with the appropriate error message. 
+
+Validation Condition: The employeeId must be exactly ten characters. The first five characters must be "GOAIR" followed by slash and followed by 4 digits. 
+
+Example: GOAIR/7385
+
+EntryUtility 
+
+ 
+
+validateDuration
+
+ 
+
+int duration 
+
+This method validates the duration according to the condition. If duration id is valid, it returns the true. If duration is not valid, throw an InvalidEntryException with the appropriate error message. 
+
+Validation Condition: The duration must between 1 and 5 (both inclusive) 
+
+ 
+
+Component Specification: InvalidEntryException (This class inherits the Exception Class) 
+
+Type (Class)  
+
+Responsibilities 
+
+InvalidEntryException 
+
+Provided with a single-argument constructor: public InvalidEntryException (String message). It is thrown when the employeeId or duration does not follow the validation rules. 
+
+
+Component Specification: UserInterface
+
+Type (Class)  
+
+Responsibilities 
+
+UserInterface
+
+In the main method get the  employee's id, entry type and duration from the user , invoke validateEmployeeId method and validateDuration method and if both are valid display the message, "Valid entry details". If the validation is invalid handle the exception appropriately.
+
+
+
+Note: 
+
+Propagate the exceptions that occur in the EntryUtility class and handle them in the main method. 
+
+If the employeeId or duration or both employeeId and duration is invalid, display the message "Invalid entry details".
+
+ In the sample input and output provided, the highlighted text in bold corresponds to the input given by the user, and the rest of the text represents the output. 
+
+Ensure to follow the object-oriented specifications provided in the question description. 
+
+Ensure to provide the names for classes, attributes, and methods as specified in the question description. 
+
+Adhere to the code template, if provided. 
+
+Please don't use System.exit(0) to terminate the program.    
+
+
+
+Sample Input / Output 1: 
+
+Enter the number of entries 
+
+3 
+
+Enter entry 1 details 
+
+GOAIR/8924:Security:4 
+
+Valid entry details 
+
+Enter entry 2 details 
+
+GOAIR/1353:Inpection:2 
+
+Valid entry details 
+
+Enter entry 3 details 
+
+GOAIR/1353:CheckIn:5 
+
+Valid entry details 
+
+  
+
+Sample Input / Output 2: 
+
+Enter the number of entries 
+
+2 
+
+Enter entry 1 details 
+
+AIRIND/8924:Boarding:4 
+
+Invalid entry details 
+
+Enter entry 2 details 
+
+GOAIR/1353:Inpection:7 
+
+Invalid entry details 
