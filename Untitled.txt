@@ -1,0 +1,318 @@
+       
+ 
+ 
+Instructions
+ 
+1.Before taking the assessment, ensure you have installed the Tekstac Plugin version 3.0.5.0 in your Eclipse or STS IDE. If not, please click here to refer the user manual or video to install the same.
+
+2.Ensure that you have MySQL 8 installed on your machine. 
+
+3.Do not make any changes to pom.xml
+
+4.Do not change the property name given in the application.properties file. If needed you can change the value of username and password according to what you have in your MYSQL.
+
+5.In case you see an error after auto-import of the project, Right click on the project->Maven->Update Project->Choose your project->Click the Force Update check box.
+
+6.Ensure to right click on "Project -> Run As -> Maven install" before you click "Save And Evaluate" the first time.
+
+7.If you happen to click "Maven clean", ensure that you right click on "Project -> Run As -> Maven install" and then click "Save and Evaluate"  for your code to get evaluated successfully.
+
+8.When you make any changes to the project, Right click on "Project -> Run As -> Maven install ". Then click "Save and Evaluate". 
+
+9.Before clicking on "Save and Evaluate" ensure that you have   "STARTED YOUR MYSQL DATABASE".
+ 
+Bank AccountTransaction Management
+ 
+ 
+ 
+1.0Introduction
+ 
+1.0 FunctionalRequirements
+ 
+ 
+Azee Bank isone of the famous Bank and it provides excellent Banking service for theircustomers. They need to automate the online operations related to Account andTransaction performed on the Account.
+ 
+You need to implement the Account andBankTransaction module of the online Bank application. The client wish to haverestful web services to open an account, and view the account details based on the requirement.
+ 
+ 
+Also the client wishes to have restful web servicesfor manipulation of BankTransaction performed on an Account  like, insert a transaction thereby update thebalance of the account on which transaction is performed , and view the banktransaction details based on the requirement.
+ 
+Help them to automate the above process bydeveloping Rest Service using Maven.
+ 
+ 
+2.0 Technical Specifications
+ 
+ 
+ 
+ 
+The provided AccountController andTransactionController which are RestController, should be created with the belowservices:
+ 
+Services:
+ 
+AccountController:
+ 
+ 
+ 
+Request Method  
+
+ 
+ 
+Request Url  
+
+ 
+ 
+Description  
+
+ 
+ 
+Post  
+
+ 
+ 
+/openAccount  
+
+ 
+ 
+This service should add the Account details by using the openAccount method of the AccountServiceImpl which inturn should use the openAccount method of the AccountDAOImpl  
+
+ 
+ 
+Get  
+
+ 
+ 
+/viewAccountByAccountNumber/{accountNumber}  
+
+ 
+ 
+This service should retrieve the existing Account details for the given account number by using the viewAccountByAccountNumber of the AccountServiceImpl which in turn should use the viewAccountByAccountNumber method of the AccountDAOImpl.  
+
+ 
+ 
+ 
+
+
+TransactionController :
+ 
+ 
+ 
+Request Method  
+
+ 
+ 
+Request Url  
+
+ 
+ 
+Description  
+
+ 
+ 
+Post  
+
+ 
+ 
+/insertTransaction/{accountNumber}  
+
+ 
+ 
+This service takes the accountNumber for which transaction is performed and the BankTransaction object as input and it should add the BankTransaction details by using the insertTransaction method of the TransactionServiceImpl which in turn should use the insertTransaction method of the TransactionDAOImpl  
+ 
+ 
+Note : The BankTransaction objects holds details like transaction Id, date, transaction type and amount  
+
+ 
+ 
+Get  
+
+ 
+ 
+/viewTransactionByTransactionType/ {transactionType }  
+
+ 
+ 
+This service should retrieve the existing BankTransaction details for the given transaction type by using the viewTransactionByTransactionType method of the TransactionServiceImpl which in turn should use the viewTransactionByTransactionType method of the TransactionDAOImpl.  
+
+ 
+ 
+ 
+ 
+ 
+Service Layer
+ 
+ 
+Refer to theIAccountService interface provided as part of the code skeleton. TheAccountServiceImpl which is provided as part of the code skeleton has torealize all the methods in the IAccountService interface
+ 
+Also  ITransactionService interface is providedas part of the code skeleton. The TransactionServiceImpl which is providedas part of the code skeleton has to realize all the methods in the ITransactionServiceinterface.
+ 
+ 
+DAO Layer
+ 
+Refer to theIAccountDAO interface provided as part of the code skeleton. The AccountDAOImplwhich is provided as part of the code skeleton has to realize all the methodsin the IAccountDAO interface.
+ 
+ 
+Also  ITransactionDAO interface is provided aspart of the code skeleton. The TransactionDAOImpl which is provided aspart of the code skeleton has to realize all the methods in the ITransactionDAOinterface.
+ 
+ 
+InAccountDAOImpl and TransactionDAOImpl class all database related operationsshould be implemented using the AccountRepository and TransactionRepositoryinterface respectively.
+ 
+ 
+Methods in AccountDAOImpl
+ 
+ 
+ 
+ 
+Method in Service  
+
+ 
+ 
+Description  
+
+ 
+ 
+openAccount  
+
+ 
+ 
+This method should add the Account details to the database using AccountRepository and return that Account object.  
+
+ 
+ 
+viewAccountByAccountNumber  
+
+ 
+ 
+This method accepts the account number as argument. It should retrieve the account details with the given account number from the database.  
+
+ 
+ 
+Methods in TransactionDAOImpl
+ 
+ 
+ 
+Method in Service  
+
+ 
+ 
+Description  
+
+ 
+ 
+insertTransaction  
+
+ 
+ 
+This method accepts account number and  a transactionObject that holds details of transaction id, date, type and amount. This method should retrieve the account object for the account number passed as parameter. Then depending on the transaction type update the balance amount of the account (if type is Deposit, set balanceAmount=balanceAmount + amount. If the type is Withdraw set balanceAmount=balanceAmount - amount).  
+ 
+ 
+Next set that account object to the transaction object. Add the transaction details to the database using  TransactionRepository and return the BankTransaction object.  
+
+ 
+ 
+viewTransactionByTransactionType  
+
+ 
+ 
+This method accepts the transaction type as argument. It should retrieve the list of transaction with the transaction type passed as parameter.   
+
+ 
+ 
+Repository Layer
+ 
+ 
+Refer to the AccountRepositoryand TransactionRepositiry interface provided as part of the code skeleton.  Use appropriate Spring Data JPA for all thedatabase related manipulation.
+ 
+Also includethe necessary method to  include the necessary methods to view BankTransaction by transaction type  in TransactionRepository interface.
+ 
+ 
+Model
+ 
+ 
+Refer to the Model classprovided as part of the class diagram/code skeleton, use appropriate annotationfor the persistence mapping in the model class.
+ 
+Note that one Account object is related to multiple Transaction objectsand one Transaction object will be related to one Account object.
+ 
+ 
+ 
+Note:
+ 
+•Use Lombok to generate getters and setters for the attributes
+ 
+ 
+•Also generate all-argument constructor using lombok
+ 
+ 
+•Do not change the datatype or the attribute name provided as part of the code skeleton
+ 
+ 
+ 
+3.0 Expected Table Structure
+ 
+ 
+The below table should getcreated automatically by the application
+ 
+account
+ 
+ 
+ 
+bank_transaction
+ 
+ 
+ 
+ 
+Note : account_number is the join column in the bank_transaction table
+ 
+4.0 Process Flow
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+•Client invokes the requiredservice.
+
+•AccountController invokes themethod of the AccountServiceImpl and TransactionController invokes the methodof the TransactionServiceImpl
+
+•AccountServiceImpl invokes themethod of the AccountDAOImpl and TransactionServiceImpl invokes the method ofthe TransactionDAOImpl
+
+•AccountDAOImpl with the help ofAccountRepository performs the service and returns the data back
+
+•TransactionDAOImpl with the helpof TransactionRepository performs the service and returns the data back
+
+•IAccountService has to be injectedinto the AccountController
+
+•IAccountDAO has to be injectedinto the AccountServiceImpl
+
+•AccountRepository has to be injectedin to the AccountDAOImpl
+
+•ITransactionService has to beinjected into the TransactionController
+
+•ITransactionDAO has to be injectedinto the TransactionServiceImpl
+
+•TransactionRepositiry has to beinjected into the TransactionDAOImpl
+
+•The AccountRepository interfaceand TransactionRepository interface should use the appropriate Spring Data JPAfor all the database related manipulation.
+ 
+ 
+4.0 Overall Design Constraints
+ 
+ 
+ 
+1)   Do not change the property namegiven in the application.properties files, you can change the value and you caninclude additional property if needed.
+ 
+2)   In the pom.xml you are provided withall the dependencies needed for developing the application.  
+ 
+3)   Use only Spring data JPA to handlepersistence. Do not generate value for the primary key attribute automatically.
+ 
+4)   Use the service type and the servicenames as expected in the specification
+ 
+5)   Adhereto the design specifications mentioned in the case study.
+ 
+6)   Donot change or delete the class/method names or return types which are providedto you as a part of the base code skeleton. 
+
+7)   Please make sure that your code does not have anycompilation errors while submitting your case study solution.
+ 
+ 
+ 
+ 
